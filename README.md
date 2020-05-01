@@ -1,4 +1,4 @@
-#movie-search-next
+## movie-search-next
 This is a movie search application created using Next.js framework and React.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
