@@ -1,6 +1,10 @@
 import Link from 'next/link'
 import styles from '../styles/home.module.scss'
 
+/**
+ * Renders Movie Item component
+ * @param {Object} props 
+ */
 export default function MovieItem(props) {
 	return (
 		<div className={styles.movieItemWrapper}>

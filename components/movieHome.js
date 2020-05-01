@@ -4,7 +4,16 @@ import {fetchMovies} from '../services/movies'
 import MovieList from './movieList'
 import CommonFunc from '../utils/commonFunc'
 
+
+/**
+ * Renders MovieHome page
+ */
 export default class MovieHome extends Component {
+	/**
+	 * Initializes props and state
+	 * @constructor
+	 * @param {Object} props 
+	 */
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -14,6 +23,9 @@ export default class MovieHome extends Component {
 		};
 	}
 
+	/**
+	 * handles btn click event on search and fetches movies list
+	 */
 	handleSearch = () => {
 		const {search} = this.state;
 		this.setState({
@@ -27,6 +39,10 @@ export default class MovieHome extends Component {
 		});
 	}
 
+	/**
+	 * handles onChange event on input
+	 * @param {Object} e event 
+	 */
 	handleChange = (e) => {
 		let search = e.target.value;
 		this.setState({
@@ -34,9 +50,13 @@ export default class MovieHome extends Component {
 		});
 	}
 
+	/**
+	 * renders the component
+	 * @returns {Element}
+	 */
 	render () {
 		const {search, searchClicked, moviesList} = this.state;
-		const btnProps = search && search.trim && search.length > 2 ? undefined : {disabled: true};
+		const btnProps = search && search.trim() && search.trim().length > 2 ? undefined : {disabled: true};
 		return (
 			<div className={styles.movieHomeWrapper}>
 				<div className={styles.searchPanel}>

@@ -1,3 +1,6 @@
+/**
+ * CommonFunc contains commonly used functions across the project
+ */
 class CommonFunc {
 
 	isUndefined = (val) => {

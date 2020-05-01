@@ -3,6 +3,12 @@ import fetch from 'node-fetch'
 import styles from '../../styles/home.module.scss'
 import APIS from '../../utils/apis'
 
+
+/**
+ * Renders Movie details, dynamic route based on imdbID
+ * @param {Object} movie
+ * @returns {Node} MovieDetail
+ */
 const MovieDetail = ({movie})  => {
     return (
         <div className={styles.movieDetailWrapper}>
@@ -75,6 +81,14 @@ const MovieDetail = ({movie})  => {
 
 export default MovieDetail
 
+/**
+ * fetches initial props during build, and runs on client side to render movie
+ * props
+ * @async
+ * @method
+ * @param {Object} query - url query
+ * @returns {Object} props object
+ */
 MovieDetail.getInitialProps =  async function ({query}) {
   const {imdbID} = query;
   const data = await fetch(APIS.movieApi.replace(/imdbID/g, imdbID));
