@@ -29,12 +29,27 @@
             border: none;
             text-transform: uppercase;
             cursor: default; 
-        }
-        
-        
+        }   
     }
     .movieListWrapper {
         padding: 10px 0;
+    }
+    .pageChangeDiv {
+        display: flex;
+        justify-content: center;
+        
+    }
+    .pageBtn {
+        outline: none;
+        margin: 10px;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        border: none;
+        &.active {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
     }
 }
 

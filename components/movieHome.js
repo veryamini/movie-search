@@ -20,6 +20,9 @@ export default class MovieHome extends Component {
 			search : '',
 			moviesList: undefined,
 			searchClicked: false,
+			maxPage: 0,
+			currPage: 0,
+			isLoading: false,
 		};
 	}
 
@@ -31,10 +34,15 @@ export default class MovieHome extends Component {
 		this.setState({
 			searchClicked: true,
 			moviesList: undefined,
+			isLoading: true,
 		});
-		fetchMovies(search).then((moviesList) => {
+		fetchMovies(search).then((response) => {
+			let {moviesList, totalResults} = response;
 			this.setState({
 				moviesList,
+				maxPage : totalResults % 10 === 0 ?  totalResults/10 : totalResults/10 + 1,
+				currPage : 1,
+				isLoading: false,
 			});
 		});
 	}
@@ -51,12 +59,31 @@ export default class MovieHome extends Component {
 	}
 
 	/**
+	 * handleChangePage handles changing page and fetching new data
+	 * @param {Number} index change in value of page to be fetched
+	 * @returns Function
+	 */
+	handleChangePage = (index) => {
+		console.log(index)
+		const {search, currPage} = this.state;
+		fetchMovies(search, currPage+index).then((response) => {
+			let {moviesList} = response;
+			this.setState({
+				moviesList,
+				currPage : this.state.currPage +index,
+			});
+		});
+	}
+
+	/**
 	 * renders the component
 	 * @returns {Element}
 	 */
 	render () {
-		const {search, searchClicked, moviesList} = this.state;
+		const {search, searchClicked, moviesList, maxPage, currPage, isLoading} = this.state;
 		const btnProps = search && search.trim() && search.trim().length > 2 ? undefined : {disabled: true};
+		const nextBtnProps = maxPage === currPage ? {disabled: true} : undefined;
+		const prevBtnProps = currPage === 1 ? {disabled: true} : undefined;
 		return (
 			<div className={styles.movieHomeWrapper}>
 				<div className={styles.searchPanel}>
@@ -76,8 +103,28 @@ export default class MovieHome extends Component {
 					</button>
 				</div>
 				<div className={styles.movieListWrapper}>
-					<MovieList searchClicked={searchClicked} isLoading={searchClicked && CommonFunc.isUndefined(moviesList)} movieList={moviesList}/>
+					<MovieList searchClicked={searchClicked} isLoading={isLoading} movieList={moviesList}/>
 				</div>
+				{
+					maxPage ? (
+						<div className={styles.pageChangeDiv}>
+							<button
+								onClick={() => this.handleChangePage(-1)}
+								{...prevBtnProps}
+								className={`${styles.pageBtn} ${prevBtnProps ? null : styles.active}`}
+							>
+								Prev
+							</button>
+							<button
+								onClick={() => this.handleChangePage(1)}
+								{...nextBtnProps}
+								className={`${styles.pageBtn} ${nextBtnProps ? null : styles.active}`}
+							>
+								Next
+							</button>
+						</div>
+					) : (null)
+				}
 			</div>
 		)
 	}
