@@ -2,6 +2,7 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 
+
 /**
  * MyApp renders app.js page and sets css globally with fonts
  */

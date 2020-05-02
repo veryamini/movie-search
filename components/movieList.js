@@ -1,6 +1,7 @@
 import styles from '../styles/home.module.scss'
 import MovieItem from './movieItem'
 
+
 /**
  * Renders Movie List component, shows loading when api hit is ongoing
  * else if no movies found, shows error.

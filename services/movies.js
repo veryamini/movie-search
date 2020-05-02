@@ -1,5 +1,6 @@
 import APIS from '../utils/apis'
 
+
 /**
  * fetches lists of movies based on search string and page number
  * @async

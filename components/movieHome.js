@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import styles from '../styles/home.module.scss'
 import {fetchMovies} from '../services/movies'
 import MovieList from './movieList'
-import CommonFunc from '../utils/commonFunc'
 
 
 /**
