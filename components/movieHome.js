@@ -63,7 +63,6 @@ export default class MovieHome extends Component {
 	 * @returns Function
 	 */
 	handleChangePage = (index) => {
-		console.log(index)
 		const {search, currPage} = this.state;
 		fetchMovies(search, currPage+index).then((response) => {
 			let {moviesList} = response;
